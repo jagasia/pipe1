@@ -1,0 +1,53 @@
+package com.example.demo.controller;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.example.demo.BranchRepository;
+import com.example.demo.model.Branch;
+
+@RestController
+public class BankController {
+	@Autowired
+	private BranchRepository brepo;
+	@GetMapping("/")
+	public String home()
+	{
+		return "Hello welcome to my spring boot app in aws";
+	}
+	
+	@GetMapping("/branch")
+	public List<Branch> read() {
+		return brepo.findAll();
+	}
+	
+	@GetMapping("/branch/{bid}")
+	public Branch read(@PathVariable("bid") String bid) {
+		return brepo.findById(bid).get();
+	}
+	
+	@PostMapping("/branch")
+	public Branch create(@RequestBody Branch branch) {
+		return brepo.save(branch);
+	}
+	
+	@PutMapping("/branch")
+	public Branch update(@RequestBody Branch branch) {
+		return brepo.save(branch);
+	}
+	
+	@DeleteMapping("/branch")
+	public void delete(String bid) {
+		brepo.delete(read(bid));
+	}
+	
+	
+}

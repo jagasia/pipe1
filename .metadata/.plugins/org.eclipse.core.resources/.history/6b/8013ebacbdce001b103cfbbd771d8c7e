@@ -24,12 +24,6 @@ public class BankController {
 		return "Hello welcome to my spring boot app in aws";
 	}
 	
-	@GetMapping("/hi")
-	public String hi()
-	{
-		return "hi";
-	}
-	
 	@GetMapping("/branch")
 	public List<Branch> read() {
 		return brepo.findAll();
